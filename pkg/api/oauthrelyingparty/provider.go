@@ -3,7 +3,6 @@ package oauthrelyingparty
 import (
 	"fmt"
 	"net/http"
-	"net/url"
 	"time"
 )
 
@@ -144,9 +143,12 @@ type GetAuthorizationURLOptions struct {
 }
 
 type GetUserProfileOptions struct {
-	HTTPRequestForm url.Values
-	RedirectURI     string
-	Nonce           string
+	// Query is the URL encoded query.
+	// Query is taken because it is the most simplest data type.
+	// The callback receiver can simply parse the callack URL and extract the encoded query, without anything further processing.
+	Query       string
+	RedirectURI string
+	Nonce       string
 }
 
 type UserProfile struct {
