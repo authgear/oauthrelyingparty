@@ -3,6 +3,7 @@ package oauthrelyingparty
 import (
 	"fmt"
 	"net/http"
+	"net/url"
 	"time"
 )
 
@@ -143,9 +144,9 @@ type GetAuthorizationURLOptions struct {
 }
 
 type GetUserProfileOptions struct {
-	Code        string
-	RedirectURI string
-	Nonce       string
+	HTTPRequestForm url.Values
+	RedirectURI     string
+	Nonce           string
 }
 
 type UserProfile struct {
