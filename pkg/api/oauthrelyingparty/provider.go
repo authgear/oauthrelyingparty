@@ -158,4 +158,5 @@ type Provider interface {
 	ProviderID(cfg ProviderConfig) ProviderID
 	GetAuthorizationURL(deps Dependencies, options GetAuthorizationURLOptions) (url string, err error)
 	GetUserProfile(deps Dependencies, options GetUserProfileOptions) (UserProfile, error)
+	GetJSONSchema() map[string]interface{}
 }
