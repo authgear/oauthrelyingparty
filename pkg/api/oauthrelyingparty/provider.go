@@ -17,11 +17,6 @@ func (c ProviderConfig) MustGetProvider() Provider {
 	return p
 }
 
-func (c ProviderConfig) Alias() string {
-	alias, _ := c["alias"].(string)
-	return alias
-}
-
 func (c ProviderConfig) Type() string {
 	typ, _ := c["type"].(string)
 	return typ
@@ -30,18 +25,6 @@ func (c ProviderConfig) Type() string {
 func (c ProviderConfig) ClientID() string {
 	client_id, _ := c["client_id"].(string)
 	return client_id
-}
-
-func (c ProviderConfig) SetDefaultsModifyDisabledFalse() {
-	_, ok := c["modify_disabled"].(bool)
-	if !ok {
-		c["modify_disabled"] = false
-	}
-}
-
-func (c ProviderConfig) ModifyDisabled() bool {
-	modify_disabled, _ := c["modify_disabled"].(bool)
-	return modify_disabled
 }
 
 func (c ProviderConfig) SetDefaultsEmailClaimConfig(claim ProviderClaimConfig) {
