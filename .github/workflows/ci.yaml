@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - '*'
+    - '!gh-pages'
+    tags:
+    - '*'
+  pull_request:
+    branches:
+    - '*'
+    - '!gh-pages'
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-go@v4
+      with:
+        go-version-file: "./go.mod"
+    - run: make vendor
+    - run: make govulncheck
+      if: ${{ !cancelled() }}
+    - run: make vet
+      if: ${{ !cancelled() }}
+    - run: make test
+      if: ${{ !cancelled() }}
+    - run: make fmt
+      if: ${{ !cancelled() }}
+    - run: make check-tidy
+      if: ${{ !cancelled() }}
