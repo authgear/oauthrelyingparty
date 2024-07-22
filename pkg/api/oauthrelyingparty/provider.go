@@ -146,11 +146,17 @@ type Clock interface {
 	NowUTC() time.Time
 }
 
+type SimpleStore interface {
+	SetWithTTL(key string, value string, ttl time.Duration) error
+	GetDel(key string) (string, error)
+}
+
 type Dependencies struct {
 	Clock          Clock
 	ProviderConfig ProviderConfig
 	ClientSecret   string
 	HTTPClient     *http.Client
+	SimpleStore    SimpleStore
 }
 
 type Provider interface {
