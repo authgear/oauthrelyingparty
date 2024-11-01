@@ -163,7 +163,7 @@ type Dependencies struct {
 type Provider interface {
 	SetDefaults(cfg ProviderConfig)
 	ProviderID(cfg ProviderConfig) ProviderID
-	GetAuthorizationURL(deps Dependencies, options GetAuthorizationURLOptions) (url string, err error)
-	GetUserProfile(deps Dependencies, options GetUserProfileOptions) (UserProfile, error)
+	GetAuthorizationURL(ctx context.Context, deps Dependencies, options GetAuthorizationURLOptions) (url string, err error)
+	GetUserProfile(ctx context.Context, deps Dependencies, options GetUserProfileOptions) (UserProfile, error)
 	GetJSONSchema() map[string]interface{}
 }
