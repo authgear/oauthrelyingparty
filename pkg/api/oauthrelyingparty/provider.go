@@ -1,6 +1,7 @@
 package oauthrelyingparty
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"time"
@@ -147,8 +148,8 @@ type Clock interface {
 }
 
 type SimpleStore interface {
-	SetWithTTL(key string, value string, ttl time.Duration) error
-	GetDel(key string) (string, error)
+	SetWithTTL(ctx context.Context, key string, value string, ttl time.Duration) error
+	GetDel(ctx context.Context, key string) (string, error)
 }
 
 type Dependencies struct {
@@ -162,7 +163,7 @@ type Dependencies struct {
 type Provider interface {
 	SetDefaults(cfg ProviderConfig)
 	ProviderID(cfg ProviderConfig) ProviderID
-	GetAuthorizationURL(deps Dependencies, options GetAuthorizationURLOptions) (url string, err error)
-	GetUserProfile(deps Dependencies, options GetUserProfileOptions) (UserProfile, error)
+	GetAuthorizationURL(ctx context.Context, deps Dependencies, options GetAuthorizationURLOptions) (url string, err error)
+	GetUserProfile(ctx context.Context, deps Dependencies, options GetUserProfileOptions) (UserProfile, error)
 	GetJSONSchema() map[string]interface{}
 }
