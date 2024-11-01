@@ -1,6 +1,7 @@
 package oauthrelyingparty
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"time"
@@ -147,8 +148,8 @@ type Clock interface {
 }
 
 type SimpleStore interface {
-	SetWithTTL(key string, value string, ttl time.Duration) error
-	GetDel(key string) (string, error)
+	SetWithTTL(ctx context.Context, key string, value string, ttl time.Duration) error
+	GetDel(ctx context.Context, key string) (string, error)
 }
 
 type Dependencies struct {
