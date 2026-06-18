@@ -4,10 +4,20 @@ import (
 	"strings"
 )
 
+type ErrorCategory string
+
+const (
+	ErrorCategoryCancelled ErrorCategory = "cancelled"
+	ErrorCategoryRejected  ErrorCategory = "rejected"
+	ErrorCategoryFailed    ErrorCategory = "failed"
+	ErrorCategoryTimeout   ErrorCategory = "timeout"
+)
+
 type ErrorResponse struct {
-	Error_           string `json:"error"`
-	ErrorDescription string `json:"error_description,omitempty"`
-	ErrorURI         string `json:"error_uri,omitempty"`
+	Error_           string        `json:"error"`
+	ErrorDescription string        `json:"error_description,omitempty"`
+	ErrorURI         string        `json:"error_uri,omitempty"`
+	Category         ErrorCategory `json:"-"`
 }
 
 func (e *ErrorResponse) Error() string {
